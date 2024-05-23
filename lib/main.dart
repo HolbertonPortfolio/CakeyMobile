@@ -1,3 +1,4 @@
+import 'package:cakey_portfolio/Presentation/routes/generated_routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +12,11 @@ class CakeyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Salam'),
-        ),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      initialRoute: '/splash',
+      onGenerateRoute: RouteGenerator().generateRoute,
     );
   }
 }
