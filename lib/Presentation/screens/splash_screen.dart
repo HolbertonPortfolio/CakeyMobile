@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../res/app_colors.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -23,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       body: Container(
-        color: Colors.amber,
+        color: AppColors.mainTheme,
         child: Center(
           child: Image.asset('assets/images/cakey_logo.png'),
         ),
