@@ -1,4 +1,5 @@
 import 'package:cakey_portfolio/Presentation/screens/main_screen.dart';
+import 'package:cakey_portfolio/Presentation/screens/onboarding_screen.dart';
 import 'package:cakey_portfolio/Presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,9 @@ class RouteGenerator {
 
       case '/home':
         return _noAnimationRoute(const MainScreen());
+
+      case '/onboarding':
+        return _noAnimationRoute(const OnboardingScreen());
 
       case '/splash':
         return MaterialPageRoute(
