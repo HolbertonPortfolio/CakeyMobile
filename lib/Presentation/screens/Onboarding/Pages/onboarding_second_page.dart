@@ -1,3 +1,4 @@
+import 'package:cakey_portfolio/Presentation/widgets/onboarding/onboarding_column_widget.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingSecondPage extends StatelessWidget {
@@ -5,9 +6,6 @@ class OnboardingSecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: const Text('Red'),
-    );
+    return const OnboardingColumn(text: 'Learn how to Bake', imagePath: 'assets/images/woman.png');
   }
 }

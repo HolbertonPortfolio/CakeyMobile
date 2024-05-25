@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cakey_portfolio/Presentation/routes/app_router.dart';
+import 'package:cakey_portfolio/res/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPageView extends StatefulWidget {
@@ -68,8 +69,8 @@ class _OnboardingPageViewState extends State<OnboardingPageView> {
                         width: currentPage.round() == index ? 32 : 16,
                         decoration: BoxDecoration(
                           color: currentPage.round() == index
-                              ? Colors.amberAccent
-                              : Colors.grey,
+                              ? AppColors.green
+                              : AppColors.lightGreen,
                           borderRadius: BorderRadius.circular(90),
                         ),
                       ),
@@ -96,16 +97,17 @@ class _OnboardingPageViewState extends State<OnboardingPageView> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.green,
                     borderRadius: BorderRadius.circular(24),
                   ),
-                  width: 110,
+                  width: 120,
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     activePage != widget.pages.length - 1
                         ? 'Next'
                         : 'Get Started',
                     textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.lightGreen, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
