@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/Onboarding/onboarding_screen.dart';
-import '../screens/main_screen.dart';
+import '../screens/MainScreen/main_screen.dart';
 import '../screens/splash_screen.dart';
 
 part 'app_router.gr.dart';

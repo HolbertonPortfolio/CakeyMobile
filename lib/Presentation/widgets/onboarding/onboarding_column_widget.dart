@@ -16,7 +16,7 @@ class OnboardingColumn extends StatelessWidget {
         children: [
           Image.asset(imagePath, height: 300, width: 350,),
           const SizedBox(height: 20,),
-          Text(text, style: GoogleFonts.poppins(
+          Text(text, style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w500
           ),),

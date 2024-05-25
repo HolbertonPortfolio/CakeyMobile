@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home_screen.dart';
 import 'package:cakey_portfolio/res/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: SafeArea(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -58,16 +57,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Screen', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
