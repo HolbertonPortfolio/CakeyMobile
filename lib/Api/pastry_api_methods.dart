@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'package:cakey_portfolio/Api/api_provider.dart';
 import 'package:cakey_portfolio/Data/pastry.dart';
 import 'package:http/http.dart' as http;
 
 class PastryApiMethods {
   Future<List<Pastry>> getAllPastries() async {
-    const url = 'https://example.com/api/pastries'; // replace with your actual URL
+    const url = '${ApiProvider.baseUrl}/pastries'; // replace with your actual URL
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

@@ -1,8 +1,11 @@
+import 'package:cakey_portfolio/Data/pastry.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CakeCardWidget extends StatelessWidget {
-  const CakeCardWidget({super.key});
+  final Pastry pastry;
+
+  const CakeCardWidget({super.key, required this.pastry});
 
   @override
   Widget build(BuildContext context) {
@@ -23,31 +26,32 @@ class CakeCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 120,
-              width: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.grey[300],
-              ),
-              child: Image.asset(
-                'assets/images/tort.png',
+          Container(
+            height: 159,
+            //width: 120,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.grey[300],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                pastry.imageUrl,
                 fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object exception, stackTrace) {
+                  return Image.asset('assets/images/tort.png', fit: BoxFit.cover,);
+                },
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              'Tort',
-              style: GoogleFonts.lato(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.green[700],
-              ),
+          Text(
+            pastry.name,
+            style: GoogleFonts.lato(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.green[700],
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
