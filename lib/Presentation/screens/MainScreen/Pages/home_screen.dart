@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cakey_portfolio/Api/pastry_api_methods.dart';
 import 'package:cakey_portfolio/Data/pastry.dart';
+import 'package:cakey_portfolio/Presentation/routes/app_router.dart';
 import 'package:cakey_portfolio/Presentation/widgets/main/cake_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,7 +55,12 @@ class HomeScreen extends StatelessWidget {
 
                       ),
                       itemBuilder: (context, index) {
-                        return CakeCardWidget(pastry: snapshot.data![index]);
+                        final pastry = snapshot.data![index];
+                        return GestureDetector(
+                          onTap: () {
+                            context.router.replace(PastryDetailsRoute(pastryId: pastry.id));
+                          },
+                            child: CakeCardWidget(pastry: snapshot.data![index]),);
                       },
                     );
                   }

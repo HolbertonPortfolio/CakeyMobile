@@ -27,6 +27,19 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingScreen(),
       );
     },
+    PastryDetailsRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<PastryDetailsRouteArgs>(
+          orElse: () =>
+              PastryDetailsRouteArgs(pastryId: pathParams.getInt('id')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: PastryDetailsScreen(
+          key: args.key,
+          pastryId: args.pastryId,
+        ),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,6 +75,45 @@ class OnboardingRoute extends PageRouteInfo<void> {
   static const String name = 'OnboardingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PastryDetailsScreen]
+class PastryDetailsRoute extends PageRouteInfo<PastryDetailsRouteArgs> {
+  PastryDetailsRoute({
+    Key? key,
+    required int pastryId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PastryDetailsRoute.name,
+          args: PastryDetailsRouteArgs(
+            key: key,
+            pastryId: pastryId,
+          ),
+          rawPathParams: {'id': pastryId},
+          initialChildren: children,
+        );
+
+  static const String name = 'PastryDetailsRoute';
+
+  static const PageInfo<PastryDetailsRouteArgs> page =
+      PageInfo<PastryDetailsRouteArgs>(name);
+}
+
+class PastryDetailsRouteArgs {
+  const PastryDetailsRouteArgs({
+    this.key,
+    required this.pastryId,
+  });
+
+  final Key? key;
+
+  final int pastryId;
+
+  @override
+  String toString() {
+    return 'PastryDetailsRouteArgs{key: $key, pastryId: $pastryId}';
+  }
 }
 
 /// generated route for
