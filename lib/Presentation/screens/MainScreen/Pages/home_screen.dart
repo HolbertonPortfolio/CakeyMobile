@@ -6,13 +6,52 @@ import 'package:cakey_portfolio/Presentation/widgets/main/cake_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final pastryApi = PastryApiMethods();
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  final PastryApiMethods pastryApi = PastryApiMethods();
+  TextEditingController searchController = TextEditingController();
+  Future<List<Pastry>>? _pastriesFuture;
+  String _query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPastries();
+    searchController.addListener(_onSearchChanged);
+  }
+
+  void _fetchPastries() {
+    setState(() {
+      if (_query.isEmpty) {
+        _pastriesFuture = pastryApi.getAllPastries();
+      } else {
+        _pastriesFuture = pastryApi.searchPastries(_query);
+      }
+    });
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      _query = searchController.text;
+      _fetchPastries();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.removeListener(_onSearchChanged);
+    searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.pink[50],
       body: Padding(
@@ -20,7 +59,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
@@ -34,17 +73,31 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search for pastries...',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
             Expanded(
               child: FutureBuilder<List<Pastry>>(
-                future: pastryApi.getAllPastries(),
+                future: _pastriesFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(child: Text('No data found'));
+                    return const Center(child: Text('No data found'));
                   } else {
                     return GridView.builder(
                       itemCount: snapshot.data!.length,
@@ -52,7 +105,6 @@ class HomeScreen extends StatelessWidget {
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.7409090909,
-
                       ),
                       itemBuilder: (context, index) {
                         final pastry = snapshot.data![index];
@@ -60,7 +112,8 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {
                             context.router.replace(PastryDetailsRoute(pastryId: pastry.id));
                           },
-                            child: CakeCardWidget(pastry: snapshot.data![index]),);
+                          child: CakeCardWidget(pastry: pastry),
+                        );
                       },
                     );
                   }
