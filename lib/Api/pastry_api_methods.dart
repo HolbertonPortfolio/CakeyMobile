@@ -29,4 +29,15 @@ class PastryApiMethods {
     }
   }
 
+  Future<List<Pastry>> searchPastries(String query) async {
+    final url = '${ApiProvider.baseUrl}/pastries/search/?query=$query';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var pastriesJson = jsonDecode(response.body) as List;
+      return pastriesJson.map((json) => Pastry.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to search pastries');
+    }
+  }
 }
