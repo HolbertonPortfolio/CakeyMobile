@@ -1,20 +1,21 @@
 import 'package:cakey_portfolio/Api/pastry_api_methods.dart';
 import 'package:cakey_portfolio/Data/pastry.dart';
 import 'package:cakey_portfolio/Data/ingredient.dart';
-import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/widgets/ingredient_list.dart';
-import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/widgets/pastry_grid.dart';
 import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'widgets/ingredient_list.dart';
+import 'widgets/pastry_grid.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   final PastryApiMethods pastryApi = PastryApiMethods();
   TextEditingController searchController = TextEditingController();
   Future<List<Pastry>>? _pastriesFuture;
@@ -52,6 +53,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _filterPastriesByIngredients(List<int> ingredientIds) {
+    setState(() {
+      if (ingredientIds.isEmpty) {
+        _fetchPastries();
+      } else {
+        _pastriesFuture = pastryApi.getPastriesByIngredients(ingredientIds);
+      }
+    });
+  }
+
   @override
   void dispose() {
     searchController.removeListener(_onSearchChanged);
@@ -85,7 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 10),
             CustomSearchBar(searchController: searchController),
             const SizedBox(height: 10),
-            IngredientList(ingredientsFuture: _ingredientsFuture),
+            IngredientList(
+              ingredientsFuture: _ingredientsFuture,
+              onIngredientsSelected: _filterPastriesByIngredients,
+            ),
             const SizedBox(height: 10),
             Expanded(
               child: PastryGrid(pastriesFuture: _pastriesFuture),
