@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home_screen.dart';
+import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/home_screen.dart';
 import 'package:cakey_portfolio/res/app_colors.dart';
 import 'package:flutter/material.dart';
 
