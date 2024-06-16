@@ -12,10 +12,10 @@ class IngredientList extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _IngredientListState createState() => _IngredientListState();
+  IngredientListState createState() => IngredientListState();
 }
 
-class _IngredientListState extends State<IngredientList> {
+class IngredientListState extends State<IngredientList> {
   List<int> selectedIngredients = [];
 
   @override
@@ -31,7 +31,7 @@ class _IngredientListState extends State<IngredientList> {
           return const Center(child: Text('No ingredients found'));
         } else {
           return SizedBox(
-            height: 100, // Adjust height as needed
+            height: 50, // Adjust height as needed
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data!.length,
@@ -49,15 +49,14 @@ class _IngredientListState extends State<IngredientList> {
                       widget.onIngredientsSelected(selectedIngredients);
                     });
                   },
-                  child: Container(
-                    width: 100, // Adjust width as needed
-                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: AnimatedSize(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.linear,
                     child: Card(
                       color: isSelected ? Colors.green[100] : null,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                        child: Row(
                           children: [
                             Text(
                               ingredient.name,
@@ -67,15 +66,8 @@ class _IngredientListState extends State<IngredientList> {
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 5),
-                            Text(
-                              ingredient.description,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[600],
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
+                            isSelected ? const SizedBox(width: 4,) : const SizedBox.shrink(),
+                            isSelected ? const Icon(Icons.check) : const SizedBox.shrink()
                           ],
                         ),
                       ),
