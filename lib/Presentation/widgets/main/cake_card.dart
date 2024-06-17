@@ -1,5 +1,6 @@
 import 'package:cakey_portfolio/Data/pastry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CakeCardWidget extends StatelessWidget {
@@ -18,16 +19,16 @@ class CakeCardWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 1,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 159,
+            height: 159.h,
             //width: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -47,7 +48,7 @@ class CakeCardWidget extends StatelessWidget {
           Text(
             pastry.name,
             style: GoogleFonts.lato(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
               color: Colors.green[700],
             ),
