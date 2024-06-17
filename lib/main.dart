@@ -1,6 +1,9 @@
 import 'package:cakey_portfolio/Presentation/routes/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'Presentation/shared/screen_util.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,14 +20,17 @@ class CakeyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        )
+    return ScreenUtilInit(
+      designSize: Config.figmaDesignSize,
+      child: MaterialApp.router(
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme,
+          )
+        ),
+        routerConfig: appRouter.config(),
       ),
-      routerConfig: appRouter.config(),
     );
   }
 }
