@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cakey_portfolio/Data/ingredient.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IngredientList extends StatefulWidget {
   final Future<List<Ingredient>>? ingredientsFuture;
@@ -31,7 +32,7 @@ class IngredientListState extends State<IngredientList> {
           return const Center(child: Text('No ingredients found'));
         } else {
           return SizedBox(
-            height: 50, // Adjust height as needed
+            height: 50.h, // Adjust height as needed
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data!.length,
@@ -55,18 +56,18 @@ class IngredientListState extends State<IngredientList> {
                     child: Card(
                       color: isSelected ? Colors.green[100] : null,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                        padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 12.0.w),
                         child: Row(
                           children: [
                             Text(
                               ingredient.name,
-                              style: const TextStyle(
-                                fontSize: 16,
+                              style: TextStyle(
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            isSelected ? const SizedBox(width: 4,) : const SizedBox.shrink(),
+                            isSelected ? 4.horizontalSpace : const SizedBox.shrink(),
                             isSelected ? const Icon(Icons.check) : const SizedBox.shrink()
                           ],
                         ),

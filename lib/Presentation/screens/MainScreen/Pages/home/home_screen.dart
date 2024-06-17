@@ -3,6 +3,7 @@ import 'package:cakey_portfolio/Data/pastry.dart';
 import 'package:cakey_portfolio/Data/ingredient.dart';
 import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'widgets/ingredient_list.dart';
@@ -75,32 +76,32 @@ class HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.pink[50],
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 40),
+            40.verticalSpace,
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 8.0.w),
                 child: Text(
                   'Catalogue',
                   style: GoogleFonts.lobster(
-                    fontSize: 28,
+                    fontSize: 28.sp,
                     color: Colors.green[700],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            10.verticalSpace,
             CustomSearchBar(searchController: searchController),
-            const SizedBox(height: 10),
+            10.verticalSpace,
             IngredientList(
               ingredientsFuture: _ingredientsFuture,
               onIngredientsSelected: _filterPastriesByIngredients,
             ),
-            const SizedBox(height: 10),
+            10.verticalSpace,
             Expanded(
               child: PastryGrid(pastriesFuture: _pastriesFuture),
             ),
