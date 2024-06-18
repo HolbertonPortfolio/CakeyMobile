@@ -45,7 +45,7 @@ class PastryApiMethods {
 
 
   Future<List<Ingredient>> getAllIngredients() async {
-    const url = '${ApiProvider.baseUrl}/ingredients'; // replace with your actual URL
+    const url = '${ApiProvider.baseUrl}/ingredients?limit=20'; // replace with your actual URL
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

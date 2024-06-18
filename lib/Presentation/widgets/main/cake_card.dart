@@ -39,6 +39,8 @@ class CakeCardWidget extends StatelessWidget {
               child: Image.network(
                 pastry.imageUrl,
                 fit: BoxFit.cover,
+                width: 168.h,
+                height: 159.h,
                 errorBuilder: (BuildContext context, Object exception, stackTrace) {
                   return Image.asset('assets/images/tort.png', fit: BoxFit.cover,);
                 },

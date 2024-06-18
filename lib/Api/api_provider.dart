@@ -1,3 +1,3 @@
 class ApiProvider {
-  static const String baseUrl = 'https://api.cakey.tech/api';
+  static const String baseUrl = 'https://cakey.fun/api';
 }
