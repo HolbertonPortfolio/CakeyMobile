@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../res/app_colors.dart';
 import 'widgets/photos/pastry_photo.dart';
+import 'widgets/stepper/pastry_step_stepper.dart';
 
 @RoutePage()
 class PastryDetailsScreen extends StatelessWidget {
@@ -36,60 +37,54 @@ class PastryDetailsScreen extends StatelessWidget {
             String ingredientNames = pastryDetail.ingredients
                 .map((ingredient) => ingredient.name)
                 .join(', ');
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  PastryPhoto(imageUrl: pastryDetail.imageUrl),
-                  Container(
+            return Column(
+              children: [
+                PastryPhoto(imageUrl: pastryDetail.imageUrl),
+                Expanded(
+                  child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     color: AppColors.pink,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         /// Name and Favourite button
                         NameAndFavouriteButton(pastryName: pastryDetail.name),
                         SizedBox(height: 8.h),
-
                         Text(
                           pastryDetail.description,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16.sp
-                          ),
+                          style: TextStyle(fontSize: 16.sp),
                         ),
                         const SizedBox(height: 16),
                         Text(
                           'Ingredients:',
                           style: TextStyle(
-                              fontSize: 24.sp, fontWeight: FontWeight.bold, fontFamily: 'Haarith'),
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Haarith',
+                          ),
                         ),
-                        Text(ingredientNames, textAlign: TextAlign.center, style: TextStyle(fontSize: 16.sp),),
+                        Text(
+                          ingredientNames,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
                         const SizedBox(height: 16),
                         const Text(
                           'Recipe:',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        ...pastryDetail.recipeSteps.map((step) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Step ${step.stepNumber}:',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(step.description),
-                              Text('Timer: ${step.timer} seconds'),
-                              const SizedBox(height: 8),
-                            ],
-                          );
-                        }).toList(),
+                        Expanded(
+                          child: PastryStepStepper(steps: pastryDetail.recipeSteps),
+                        ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }
         },
