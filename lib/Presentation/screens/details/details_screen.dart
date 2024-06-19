@@ -37,54 +37,80 @@ class PastryDetailsScreen extends StatelessWidget {
             String ingredientNames = pastryDetail.ingredients
                 .map((ingredient) => ingredient.name)
                 .join(', ');
-            return Column(
-              children: [
-                PastryPhoto(imageUrl: pastryDetail.imageUrl),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  PastryPhoto(imageUrl: pastryDetail.imageUrl),
+                  Container(
+                    height: 0.65.sh,
                     color: AppColors.pink,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        /// Name and Favourite button
-                        NameAndFavouriteButton(pastryName: pastryDetail.name),
-                        SizedBox(height: 8.h),
-                        Text(
-                          pastryDetail.description,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16.sp),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Ingredients:',
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Haarith',
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24.w),
+                          child: Column(
+                            children: [
+                              /// Name and Favourite button
+                              NameAndFavouriteButton(pastryName: pastryDetail.name),
+                              SizedBox(height: 8.h),
+                              Text(
+                                pastryDetail.description,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16.sp),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                'Ingredients:',
+                                style: TextStyle(
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Haarith',
+                                ),
+                              ),
+                              Text(
+                                ingredientNames,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 16.sp),
+                              ),
+                              16.verticalSpace,
+                            ],
                           ),
                         ),
-                        Text(
-                          ingredientNames,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16.sp),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Recipe:',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+
                         Expanded(
-                          child: PastryStepStepper(steps: pastryDetail.recipeSteps),
-                        ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(48),
+                              border: Border.all(width: 2, color: Colors.pinkAccent)
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 24.w),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Recipe:',
+                                    style: TextStyle(
+                                      fontSize: 24.sp,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Haarith',
+                                    ),
+                                  ),
+                                  8.verticalSpace,
+                                  Expanded(
+                                    child: PastryStepStepper(steps: pastryDetail.recipeSteps),
+                                  ),
+                                ]
+                              ),
+                            ),
+                          ),
+                        )
+
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
         },

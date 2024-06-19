@@ -1,4 +1,6 @@
+import 'package:cakey_portfolio/Presentation/screens/details/widgets/stepper/widgets/step_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../Data/recipe_step.dart';
 
 class PastryStepStepper extends StatefulWidget {
@@ -24,6 +26,23 @@ class PastryStepStepperState extends State<PastryStepStepper> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Step Bubbles
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: (1.sw - 370) / 2),
+          // height: 0.1.sh,
+          width: 1.sw,
+          child: Stack(
+            children: List.generate(widget.steps.length, (index) {
+              return index == 0
+                  ? StepIndicator(currentPage: _currentPage, index: index,)
+                  : Positioned(
+                      left: index * 30,
+                      child: StepIndicator(currentPage: _currentPage, index: index,)
+                    );
+            }),
+          ),
+        ),
+        // Page View for Steps
         Expanded(
           child: PageView.builder(
             controller: _pageController,
@@ -36,22 +55,19 @@ class PastryStepStepperState extends State<PastryStepStepper> {
             itemBuilder: (context, index) {
               final step = widget.steps[index];
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.only(top: 16.0.h),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      'Step ${step.stepNumber}:',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(step.description),
-                    Text('Timer: ${step.timer} seconds'),
+
+                    Text(step.description, textAlign: TextAlign.center,),
                   ],
                 ),
               );
             },
           ),
         ),
+        // Navigation Buttons
         Row(
           mainAxisAlignment: _currentPage == 0
               ? MainAxisAlignment.end
