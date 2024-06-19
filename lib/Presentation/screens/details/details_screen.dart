@@ -35,7 +35,7 @@ class PastryDetailsScreen extends StatelessWidget {
           } else {
             final pastryDetail = snapshot.data!;
             String ingredientNames = pastryDetail.ingredients
-                .map((ingredient) => ingredient.name)
+                .map((ingredient) => ingredient.name.capitalize())
                 .join(', ');
             return SingleChildScrollView(
               child: Column(
@@ -116,5 +116,12 @@ class PastryDetailsScreen extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
   }
 }

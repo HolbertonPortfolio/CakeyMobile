@@ -27,19 +27,38 @@ class PastryStepStepperState extends State<PastryStepStepper> {
     return Column(
       children: [
         // Step Bubbles
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: (1.sw - 370) / 2),
-          // height: 0.1.sh,
-          width: 1.sw,
-          child: Stack(
-            children: List.generate(widget.steps.length, (index) {
-              return index == 0
-                  ? StepIndicator(currentPage: _currentPage, index: index,)
-                  : Positioned(
-                      left: index * 30,
-                      child: StepIndicator(currentPage: _currentPage, index: index,)
-                    );
-            }),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: (1.sw - 370) / 2),
+            // height: 0.1.sh,
+            width: 1.5.sw,
+            child: Stack(
+              children: List.generate(widget.steps.length, (index) {
+                return index == 0
+                    ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                    _pageController.jumpToPage(index);
+                  },
+                  child: StepIndicator(currentPage: _currentPage, index: index,),
+                )
+                    : Positioned(
+                  left: index * 30,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentPage = index;
+                      });
+                      _pageController.jumpToPage(index);
+                    },
+                    child: StepIndicator(currentPage: _currentPage, index: index,),
+                  ),
+                );
+              }),
+            ),
           ),
         ),
         // Page View for Steps
