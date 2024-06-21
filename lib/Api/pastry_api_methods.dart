@@ -8,7 +8,7 @@ import '../Data/ingredient.dart';
 
 class PastryApiMethods {
   Future<List<Pastry>> getAllPastries() async {
-    const url = '${ApiProvider.baseUrl}/pastries'; // replace with your actual URL
+    const url = '${ApiProvider.baseUrl}/pastries?limit=20'; // replace with your actual URL
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

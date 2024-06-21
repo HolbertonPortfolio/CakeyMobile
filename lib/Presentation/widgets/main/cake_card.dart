@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../res/app_colors.dart';
+
 class CakeCardWidget extends StatelessWidget {
   final Pastry pastry;
 
@@ -52,7 +54,8 @@ class CakeCardWidget extends StatelessWidget {
             style: GoogleFonts.lato(
               fontSize: 20.sp,
               fontWeight: FontWeight.bold,
-              color: Colors.green[700],
+
+              color: AppColors.green700,
             ),
             textAlign: TextAlign.center,
           ),

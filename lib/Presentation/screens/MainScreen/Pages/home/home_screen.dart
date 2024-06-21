@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../res/app_colors.dart';
 import 'widgets/ingredient_list.dart';
 import 'widgets/pastry_grid.dart';
 
@@ -74,7 +75,7 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[50],
+      backgroundColor: AppColors.pink50,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
         child: Column(
@@ -89,7 +90,7 @@ class HomeScreenState extends State<HomeScreen> {
                   'Catalogue',
                   style: GoogleFonts.lobster(
                     fontSize: 28.sp,
-                    color: Colors.green[700],
+                    color: AppColors.green700,
                   ),
                 ),
               ),
