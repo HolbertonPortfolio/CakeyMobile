@@ -3,6 +3,9 @@ import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/home_
 import 'package:cakey_portfolio/res/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'Pages/add_pastry/add_pastry_screen.dart';
+import 'Pages/profile/profile_screen.dart';
+
 @RoutePage()
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const SearchScreen(),
+    const AddPastryScreen(),
     const ProfileScreen(),
   ];
 
@@ -53,30 +56,6 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onItemTapped,
 
       ),
-    );
-  }
-}
-
-
-
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Search Screen', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Profile Screen', style: TextStyle(fontSize: 24)),
     );
   }
 }
