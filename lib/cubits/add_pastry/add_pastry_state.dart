@@ -8,3 +8,12 @@ sealed class AddPastryState extends Equatable {
 }
 
 final class AddPastryInitial extends AddPastryState {}
+
+class AddPastryStepChanged extends AddPastryState {
+  final int step;
+
+  const AddPastryStepChanged(this.step);
+
+  @override
+  List<Object> get props => [step];
+}

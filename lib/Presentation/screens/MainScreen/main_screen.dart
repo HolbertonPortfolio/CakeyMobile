@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cakey_portfolio/Presentation/screens/MainScreen/Pages/home/home_screen.dart';
+import 'package:cakey_portfolio/cubits/add_pastry/add_pastry_cubit.dart';
 import 'package:cakey_portfolio/res/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Pages/add_pastry/add_pastry_screen.dart';
 import 'Pages/profile/profile_screen.dart';
 
 @RoutePage()
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -20,7 +21,10 @@ class _MainScreenState extends State<MainScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const AddPastryScreen(),
+    BlocProvider(
+      create: (context) => AddPastryCubit(),
+      child: const AddPastryScreen(),
+    ),
     const ProfileScreen(),
   ];
 
