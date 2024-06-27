@@ -17,3 +17,12 @@ class AddPastryStepChanged extends AddPastryState {
   @override
   List<Object> get props => [step];
 }
+
+class AddPastryValidationError extends AddPastryState {
+  final String message;
+
+  const AddPastryValidationError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

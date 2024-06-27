@@ -26,7 +26,15 @@ class AddPastryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddPastryCubit, AddPastryState>(
+    return BlocListener<AddPastryCubit, AddPastryState>(
+      listener: (context, state) {
+        if (state is AddPastryValidationError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message)),
+          );
+        }
+      },
+      child: BlocBuilder<AddPastryCubit, AddPastryState>(
         builder: (context, state) {
           final cubit = context.read<AddPastryCubit>();
           int currentStep = cubit.currentStep.value;
@@ -105,6 +113,7 @@ class AddPastryScreen extends StatelessWidget {
             ],
           );
         },
+      ),
     );
   }
 }
