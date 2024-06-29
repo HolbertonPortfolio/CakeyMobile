@@ -1,5 +1,7 @@
 import 'package:cakey_portfolio/res/app_colors.dart';
 import 'package:flutter/material.dart';
+import '../../../../../Api/pastry_api_methods.dart';
+import '../home/widgets/pastry_grid.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,19 +11,18 @@ class ProfileScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.pink50,
-          title: const Text('Profile'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Added Pastries'),
-              Tab(text: 'Favourite Pastries'),
-            ],
-          ),
-        ),
         body: Column(
           children: [
             _buildProfileHeader(),
+            const TabBar(
+              labelColor: AppColors.pinkAccent,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: AppColors.pinkAccent,
+              tabs: [
+                Tab(text: 'Added Pastries'),
+                Tab(text: 'Favourite Pastries'),
+              ],
+            ),
             Expanded(
               child: TabBarView(
                 children: [
@@ -53,10 +54,10 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            'Username',
+            'Arzumirzeb',
             style: TextStyle(
               fontSize: 24,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               color: Colors.black,
             ),
           ),
@@ -66,28 +67,12 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildAddedPastriesSection() {
-    // Replace with actual list of added pastries
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: const Icon(Icons.cake),
-          title: Text('Added Pastry ${index + 1}'),
-        );
-      },
-    );
+    final pastriesFuture = PastryApiMethods().searchPastries('s');
+    return PastryGrid(pastriesFuture: pastriesFuture);
   }
 
   Widget _buildFavouritePastriesSection() {
-    // Replace with actual list of favourite pastries
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: const Icon(Icons.favorite),
-          title: Text('Favourite Pastry ${index + 1}'),
-        );
-      },
-    );
+    final favoritePastriesFuture = PastryApiMethods().getPastriesByIngredients([30, 27, 7, 29]);
+    return PastryGrid(pastriesFuture: favoritePastriesFuture);
   }
 }
